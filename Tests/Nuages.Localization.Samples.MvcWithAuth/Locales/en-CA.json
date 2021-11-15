@@ -1,0 +1,23 @@
+{
+  "Home" : "Home",
+  "Privacy": "Privacy (Protected)",
+  "Login" : "Login",
+  "Logout": "Logout",
+  "Register" : "Register",
+  "Hello" : "Hello",
+  "PrivacyPolicy": "Privacy Policy",
+  "PrivacyPolicyMessage": "Use this page to detail your site's privacy policy.",
+  "Nuages Localization Sample": "Nuages Localization Sample",
+  "parent" :
+  {
+    "child" : "value",
+    "child2" : "value 2"
+  },
+  "Remember me?" : "Remember me?",
+  "The {0} field is not a valid e-mail address." : "The {0} field is not a valid e-mail address.",
+  "Email" : "Email",
+  "Password" : "Password",
+  "Confirm password": "Confirm password",
+  "The password and confirmation password do not match.": "The password and confirmation password do not match",
+  "The {0} must be at least {2} and at max {1} characters long.": "The {0} must be at least {2} and at max {1} characters long."
+}

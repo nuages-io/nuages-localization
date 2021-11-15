@@ -1,0 +1,24 @@
+@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@model Nuages.Localization.Samples.MvcWithAuth.Test
+
+@inject IViewLocalizer Localizer
+
+
+@{
+    // ReSharper disable once ArrangeThisQualifier
+    this.Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body>
+<div>
+    @Localizer["parent:child"]
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "Home" : "Acceuil",
+  "Privacy": "Vie privée (Protégé)",
+  "Login" : "Connexion",
+  "Logout": "Fermer la session",
+  "Register" : "Enregistrement",
+  "Hello" : "Bonjour",
+  "PrivacyPolicy": "Politique de confidentialité",
+  "PrivacyPolicyMessage": "Utilisez cette page pour détailler la politique de confidentialité de votre site.",
+  "Nuages Localization Sample": "Exemple Nuages Localization",
+  "parent" :
+  {
+    "child" : "valeur",
+    "child2" : "valeur 2"
+  },
+  "Remember me?" : "Se rappelez de moi?",
+  "The {0} field is not a valid e-mail address." : "Le champs {0} n'est pas une adresse de courriel valide.",
+  "Email" : "Courriel",
+  "Password" : "Mot de passe",
+  "Confirm password": "Confirmer le mot de passe",
+  "The password and confirmation password do not match.": "Le mot de passe et le mot de passe de confirmation ne correspondent pas",
+  "The {0} must be at least {2} and at max {1} characters long.": "Le {0} doit comporter au moins {2} et au maximum {1} caractères."
+  
+}

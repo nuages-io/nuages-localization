@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
+        <IsPackable>true</IsPackable>
+        <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
+       <LangVersion>10</LangVersion>
+  
+    </PropertyGroup>
+
+
+</Project>

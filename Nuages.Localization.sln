@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.Localization", "Nuages.Localization\Nuages.Localization.csproj", "{C99F9EC4-328E-49CE-B895-EBFA32C5F16A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CCCA7826-A505-4CCA-8B2E-1517B89CC7DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.Localization.Samples.MvcWithAuth", "Tests\Nuages.Localization.Samples.MvcWithAuth\Nuages.Localization.Samples.MvcWithAuth.csproj", "{80DDB2F0-CA6E-4EE7-B230-AA27A6152782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.Localization.Tests", "Tests\Nuages.Localization.Tests\Nuages.Localization.Tests.csproj", "{F16FE924-2162-43E1-B2A3-2334A1258E5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.Localization.Tests.Integration", "Tests\Nuages.Localization.Tests.Integration\Nuages.Localization.Tests.Integration.csproj", "{FACC378E-3261-4929-B4F5-0E788798AE60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.Localization.Config.Sources", "Nuages.Localization.Config.Sources\Nuages.Localization.Config.Sources.csproj", "{4E5818BC-A9BD-4EFD-B827-6262A4935593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.Localization.Config.Providers", "Nuages.Localization.Config.Providers\Nuages.Localization.Config.Providers.csproj", "{08301E57-3292-4D40-BB5A-9DD29592731C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WithConfig", "WithConfig", "{E1FA9AFE-964E-41E5-82FB-E49E9DCF402D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C99F9EC4-328E-49CE-B895-EBFA32C5F16A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99F9EC4-328E-49CE-B895-EBFA32C5F16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99F9EC4-328E-49CE-B895-EBFA32C5F16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99F9EC4-328E-49CE-B895-EBFA32C5F16A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80DDB2F0-CA6E-4EE7-B230-AA27A6152782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80DDB2F0-CA6E-4EE7-B230-AA27A6152782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80DDB2F0-CA6E-4EE7-B230-AA27A6152782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80DDB2F0-CA6E-4EE7-B230-AA27A6152782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F16FE924-2162-43E1-B2A3-2334A1258E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F16FE924-2162-43E1-B2A3-2334A1258E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F16FE924-2162-43E1-B2A3-2334A1258E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F16FE924-2162-43E1-B2A3-2334A1258E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FACC378E-3261-4929-B4F5-0E788798AE60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FACC378E-3261-4929-B4F5-0E788798AE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FACC378E-3261-4929-B4F5-0E788798AE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FACC378E-3261-4929-B4F5-0E788798AE60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5818BC-A9BD-4EFD-B827-6262A4935593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5818BC-A9BD-4EFD-B827-6262A4935593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5818BC-A9BD-4EFD-B827-6262A4935593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5818BC-A9BD-4EFD-B827-6262A4935593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08301E57-3292-4D40-BB5A-9DD29592731C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08301E57-3292-4D40-BB5A-9DD29592731C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08301E57-3292-4D40-BB5A-9DD29592731C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08301E57-3292-4D40-BB5A-9DD29592731C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80DDB2F0-CA6E-4EE7-B230-AA27A6152782} = {CCCA7826-A505-4CCA-8B2E-1517B89CC7DA}
+		{F16FE924-2162-43E1-B2A3-2334A1258E5E} = {CCCA7826-A505-4CCA-8B2E-1517B89CC7DA}
+		{FACC378E-3261-4929-B4F5-0E788798AE60} = {CCCA7826-A505-4CCA-8B2E-1517B89CC7DA}
+		{08301E57-3292-4D40-BB5A-9DD29592731C} = {E1FA9AFE-964E-41E5-82FB-E49E9DCF402D}
+		{4E5818BC-A9BD-4EFD-B827-6262A4935593} = {E1FA9AFE-964E-41E5-82FB-E49E9DCF402D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <UserSecretsId>aspnet-Nuages.Localization.Samples.MvcWithAuth-7C0EEAD7-6D95-47A6-9033-9EC754C49AE1</UserSecretsId>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Nuages.Localization.Config.Providers\Nuages.Localization.Config.Providers.csproj" />
+      <ProjectReference Include="..\..\Nuages.Localization.Config.Sources\Nuages.Localization.Config.Sources.csproj" />
+      <ProjectReference Include="..\..\Nuages.Localization\Nuages.Localization.csproj" />
+    </ItemGroup>
+
+</Project>
