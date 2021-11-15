@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Nuages.Localization.Config.Providers\Nuages.Localization.Config.Providers.csproj" />
-        <ProjectReference Include="..\..\Nuages.Localization.Config.Sources\Nuages.Localization.Config.Sources.csproj" />
         <ProjectReference Include="..\..\Nuages.Localization\Nuages.Localization.csproj" />
     </ItemGroup>
 </Project>

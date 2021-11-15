@@ -8,12 +8,15 @@ using System.Linq;
 using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Nuages.Localization.LanguageProvider;
 using Nuages.Localization.MissingLocalization;
+using Nuages.Localization.Option;
+using Nuages.Localization.Storage.Config.Providers;
 
 #endregion
 
@@ -24,38 +27,60 @@ public static class LocalizationConfigExtensions
 {
     // ReSharper disable once UnusedMember.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public static INuagesLocalizationBuilder AddStringProvider<T, TD>(this INuagesLocalizationBuilder builder) where T : class, IStringLocalizerFactory where TD : class, IStringProvider
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static ILocalizationBuilder AddStringProvider<T, TD>(this ILocalizationBuilder builder) where T : class, IStringLocalizerFactory where TD : class, IStringProvider
     {
         builder.Services.AddSingleton<IStringLocalizerFactory, T>();
         builder.Services.AddScoped<IStringProvider, TD>();
 
         return builder;
     }
+
+    // ReSharper disable once MemberCanBePrivate.Global
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static ILocalizationBuilder AddDefaultStringProvider(this ILocalizationBuilder builder)
+    {
+        return AddStringProvider<StringLocalizerFactoryFromConfig, StringProviderFromConfig>(builder);
+    }
     
     // ReSharper disable once UnusedMember.Global
-    public static INuagesLocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static ILocalizationBuilder AddNuagesLocalization(this IMvcBuilder mvcBuilder,
         IConfiguration configuration)
     {
-        return AddNuagesLocalizationInternal(services, configuration, null);
+        return AddNuagesLocalizationInternal(mvcBuilder, configuration, null);
     }
 
     // ReSharper disable once UnusedMember.Global
-    public static INuagesLocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
+    public static ILocalizationBuilder AddNuagesLocalization(this IMvcBuilder mvcBuilder,
         IConfiguration configuration, Action<NuagesLocalizationOptions> configure)
     {
-        return AddNuagesLocalizationInternal(services, configuration, configure);
+        return AddNuagesLocalizationInternal(mvcBuilder, configuration, configure);
     }
     
     // ReSharper disable once UnusedMember.Global
-    public static INuagesLocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static ILocalizationBuilder AddNuagesLocalization(this IMvcBuilder mvcBuilder,
        Action<NuagesLocalizationOptions> configure)
     {
-        return AddNuagesLocalizationInternal(services, null, configure);
+        return AddNuagesLocalizationInternal(mvcBuilder, null, configure);
     }
     
-    private static INuagesLocalizationBuilder AddNuagesLocalizationInternal(this IServiceCollection services,
+    // ReSharper disable once UnusedMember.Global
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static ILocalizationBuilder AddNuagesLocalization(this IMvcBuilder mvcBuilder)
+    {
+        return AddNuagesLocalizationInternal(mvcBuilder, null, null);
+    }
+    
+    private static ILocalizationBuilder AddNuagesLocalizationInternal(this IMvcBuilder mvcBuilder,
         IConfiguration? configuration, Action<NuagesLocalizationOptions>? configure)
     {
+        var services = mvcBuilder.Services;
+        
+        mvcBuilder.AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+            .AddDataAnnotationsLocalization(); 
+        
         if (configuration != null)
         {
             services.Configure<NuagesLocalizationOptions>(
@@ -66,7 +91,7 @@ public static class LocalizationConfigExtensions
             services.Configure(configure);
         
         services.AddSingleton<IConfigureOptions<RequestLocalizationOptions>, ConfigureRequestLocalizationOptions>();
-        services.AddSingleton<IConfigureOptions<NuagesLocalizationOptions>, ConfigureNuagesLocalizationOptions>();
+        services.AddSingleton<IConfigureOptions<NuagesLocalizationOptions>, ConfigureLocalizationOptions>();
         
         services.PostConfigure<NuagesLocalizationOptions>(localizationOptions =>
         {
@@ -84,7 +109,6 @@ public static class LocalizationConfigExtensions
 
         AddHttpStuff(services);
         
-        
         services.AddScoped<IStringLocalizer, StringLocalizer>();
         services.AddScoped(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
         services.AddSingleton<IMissingLocalizationHandler, MissingLocalizationConsoleHandler>();
@@ -93,10 +117,12 @@ public static class LocalizationConfigExtensions
         services.AddScoped<ILanguageProvider, FromFallbackCultureLanguageProvider>();
         services.AddScoped<ILanguageProvider, FromBrowserLanguageProvider>();
         services.AddScoped<ILanguageProvider, FromAuthenticatedUserClaimLanguageProvider>();
-        
-        //services.AddScoped<ILanguageProvider, FromAuthenticatedUserClaimLanguageProvider>();
 
-        return new NuagesLocalizationBuilder(services);
+        var builder = new LocalizationBuilder(services);
+
+        builder.AddDefaultStringProvider();
+
+        return builder;
     }
 
     private static IEnumerable<string> ValidationErrors(object option)

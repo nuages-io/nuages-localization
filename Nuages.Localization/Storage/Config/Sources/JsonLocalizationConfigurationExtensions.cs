@@ -3,11 +3,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.Extensions.Configuration;
-using Nuages.Localization.Config.Sources.FromSDK;
+using Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 #endregion
 
-namespace Nuages.Localization.Config.Sources;
+namespace Nuages.Localization.Storage.Config.Sources;
 
 [ExcludeFromCodeCoverage]
 // ReSharper disable once UnusedType.Global

@@ -2,9 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Nuages.Localization;
 
-public class NuagesLocalizationBuilder : INuagesLocalizationBuilder
+public class LocalizationBuilder : ILocalizationBuilder
 {
-    public NuagesLocalizationBuilder(IServiceCollection services)
+    public LocalizationBuilder(IServiceCollection services)
     {
         Services = services;
     }

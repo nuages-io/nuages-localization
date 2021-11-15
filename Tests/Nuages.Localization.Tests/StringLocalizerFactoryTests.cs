@@ -3,8 +3,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Moq;
-using Nuages.Localization.Config.Providers;
 using Nuages.Localization.MissingLocalization;
+using Nuages.Localization.Storage.Config.Providers;
 using Xunit;
 
 #endregion

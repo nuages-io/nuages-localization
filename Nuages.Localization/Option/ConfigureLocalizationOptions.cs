@@ -1,13 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Nuages.Localization;
+namespace Nuages.Localization.Option;
 
-public class ConfigureNuagesLocalizationOptions : IConfigureOptions<NuagesLocalizationOptions>
+public class ConfigureLocalizationOptions : IConfigureOptions<NuagesLocalizationOptions>
 {
     private readonly IConfiguration _configuration;
 
-    public ConfigureNuagesLocalizationOptions(IConfiguration configuration)
+    public ConfigureLocalizationOptions(IConfiguration configuration)
     {
         _configuration = configuration;
     }

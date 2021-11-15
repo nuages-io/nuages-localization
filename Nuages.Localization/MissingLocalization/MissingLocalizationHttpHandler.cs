@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using Nuages.Localization.Option;
 
 #endregion
 
@@ -16,13 +17,13 @@ public class MissingLocalizationHttpHandler : IMissingLocalizationHandler
 {
     public const string CantPostMissingTranslation = "CantPostMissingTranslation";
     private readonly HttpClient? _client;
-    private readonly NuagesLocalizationOptions _localizationOptions;
+    private readonly NuagesLocalizationOptions _nuagesLocalizationOptions;
 
     public MissingLocalizationHttpHandler(IHttpClientFactory clientFactory, IOptions<NuagesLocalizationOptions> options)
     {
-        _localizationOptions = options.Value;
+        _nuagesLocalizationOptions = options.Value;
 
-        if (!string.IsNullOrEmpty(_localizationOptions.MissingTranslationUrl))
+        if (!string.IsNullOrEmpty(_nuagesLocalizationOptions.MissingTranslationUrl))
             _client = clientFactory.CreateClient();
     }
 
@@ -37,7 +38,7 @@ public class MissingLocalizationHttpHandler : IMissingLocalizationHandler
 
             var json = JsonSerializer.Serialize(data);
 
-            var res = await _client.PostAsync(_localizationOptions.MissingTranslationUrl, new StringContent(json));
+            var res = await _client.PostAsync(_nuagesLocalizationOptions.MissingTranslationUrl, new StringContent(json));
 
             if (res.StatusCode != HttpStatusCode.OK) throw new Exception(CantPostMissingTranslation);
         }

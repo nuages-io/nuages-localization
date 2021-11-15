@@ -7,22 +7,22 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Nuages.Localization.LanguageProvider;
 
-namespace Nuages.Localization;
+namespace Nuages.Localization.Option;
 
 public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLocalizationOptions>
 {
-    private readonly NuagesLocalizationOptions _nuageLocalizationOptions;
+    private readonly NuagesLocalizationOptions _nuagesLocalizationOptions;
 
     public ConfigureRequestLocalizationOptions(IOptions<NuagesLocalizationOptions> nuageLocalizationOptions)
     {
-        _nuageLocalizationOptions = nuageLocalizationOptions.Value;
+        _nuagesLocalizationOptions = nuageLocalizationOptions.Value;
     }
 
     public void Configure(RequestLocalizationOptions options)
     {
-        var supportedUiCultures = _nuageLocalizationOptions.Cultures.Select(c => new CultureInfo(c)).ToList();
+        var supportedUiCultures = _nuagesLocalizationOptions.Cultures.Select(c => new CultureInfo(c)).ToList();
 
-        var defaultCulture = _nuageLocalizationOptions.FallbackCulture;
+        var defaultCulture = _nuagesLocalizationOptions.FallbackCulture;
 
         options.DefaultRequestCulture = new RequestCulture(defaultCulture, defaultCulture);
 

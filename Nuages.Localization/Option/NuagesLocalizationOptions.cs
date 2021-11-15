@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Nuages.Localization;
+namespace Nuages.Localization.Option;
 
 public class NuagesLocalizationOptions
 {

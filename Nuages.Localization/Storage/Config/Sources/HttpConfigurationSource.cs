@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 #endregion
 
-namespace Nuages.Localization.Config.Sources;
+namespace Nuages.Localization.Storage.Config.Sources;
 
 [ExcludeFromCodeCoverage]
 public class HttpConfigurationSource : IConfigurationSource

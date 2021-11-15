@@ -4,12 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nuages.Localization.Config.Providers;
 using Nuages.Localization.Samples.MvcWithAuth.Data;
 
 #endregion
@@ -34,13 +32,10 @@ public class Startup
                 Configuration.GetConnectionString("DefaultConnection")));
         services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
-        services.AddControllersWithViews().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-            .AddDataAnnotationsLocalization();
-        services.AddRazorPages();
-
-        //ADD THIS LINE
-        services.AddNuagesLocalization(Configuration)
-            .AddStringProvider<StringLocalizerFactoryFromConfig, StringProviderFromConfig>();
+        
+        services.AddControllersWithViews();
+        services.AddRazorPages()
+            .AddNuagesLocalization(Configuration);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

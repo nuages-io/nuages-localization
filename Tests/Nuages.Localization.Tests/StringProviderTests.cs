@@ -2,7 +2,8 @@
 
 using Microsoft.Extensions.Configuration;
 using Moq;
-using Nuages.Localization.Config.Providers;
+using Nuages.Localization.Option;
+using Nuages.Localization.Storage.Config.Providers;
 using Xunit;
 
 #endregion
@@ -26,7 +27,7 @@ public class StringProviderTests
         const string name = "name";
         const string value = "value";
 
-        _configuration.Setup(m => m.GetSection($"{lang}:{name}").Value).Returns(value);
+        _configuration.Setup(m => m.GetSection($"{NuagesLocalizationOptions.NuagesLocalizationValues}:{lang}:{name}").Value).Returns(value);
 
         var res = _stringProviderFromConfig.GetString(name, lang);
         Assert.Equal(value, res);

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 #endregion
 
-namespace Nuages.Localization.Config.Sources.FromSDK;
+namespace Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 [ExcludeFromCodeCoverage]
 public class JsonConfigurationFileParser

@@ -4,7 +4,7 @@
 
 using Microsoft.Extensions.Configuration;
 
-namespace Nuages.Localization.Config.Sources.FromSDK;
+namespace Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 public class JsonConfigurationSource : FileConfigurationSource
 {

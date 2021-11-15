@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Nuages.Localization;
 
-public interface INuagesLocalizationBuilder
+public interface ILocalizationBuilder
 {
     IServiceCollection Services { get; }
 }

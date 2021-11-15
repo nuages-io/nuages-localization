@@ -1,7 +1,7 @@
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Nuages.Localization.Option;
 
 
 namespace Nuages.Localization.LanguageProvider;
@@ -18,10 +18,11 @@ public class FromBrowserLanguageProvider : ILanguageProvider
         _options = options;
     }
     
+    // ReSharper disable once ReturnTypeCanBeNotNullable
     public string? GetLanguage()
     {
         var context = _contextAccessor.HttpContext!;
-        string? lang = null;
+        string? lang;
 
         var cookieName = _options.Value.LangCookie;
         if (cookieName != null && context.Request.Cookies.ContainsKey(cookieName))
@@ -32,11 +33,14 @@ public class FromBrowserLanguageProvider : ILanguageProvider
         {
             lang = context.Request.Headers["Accept-Language"].ToString().Split(";")
                 .FirstOrDefault()?.Split(",").FirstOrDefault();
-        
         }
 
         var finalCulture = _options.Value.Cultures.FirstOrDefault(c => c.StartsWith($"{lang}-"));
 
-        return string.IsNullOrEmpty(finalCulture) ?  "en-CA" : finalCulture;
+        var val = string.IsNullOrEmpty(finalCulture) ?  "en-CA" : finalCulture;
+
+        context.Response.Cookies.Append(cookieName!, lang!);
+
+        return val;
     }
 }

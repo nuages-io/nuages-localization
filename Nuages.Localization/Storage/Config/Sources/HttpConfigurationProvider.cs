@@ -5,11 +5,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
-using Nuages.Localization.Config.Sources.FromSDK;
+using Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 #endregion
 
-namespace Nuages.Localization.Config.Sources;
+namespace Nuages.Localization.Storage.Config.Sources;
 
 [ExcludeFromCodeCoverage]
 internal class HttpConfigurationProvider : ConfigurationProvider, IDisposable

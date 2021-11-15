@@ -1,8 +1,8 @@
-
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Nuages.Localization.Option;
 
-namespace Nuages.Localization.Config.Sources.FromSDK;
+namespace Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 public class JsonConfigurationProvider : FileConfigurationProvider
 {

@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.Extensions.Options;
+using Nuages.Localization.Option;
 
 namespace Nuages.Localization.LanguageProvider;
 

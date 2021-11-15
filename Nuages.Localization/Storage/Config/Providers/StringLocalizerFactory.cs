@@ -8,7 +8,7 @@ using Nuages.Localization.MissingLocalization;
 
 #endregion
 
-namespace Nuages.Localization.Config.Providers;
+namespace Nuages.Localization.Storage.Config.Providers;
 
 // ReSharper disable once UnusedType.Global
 public class StringLocalizerFactoryFromConfig : IStringLocalizerFactory

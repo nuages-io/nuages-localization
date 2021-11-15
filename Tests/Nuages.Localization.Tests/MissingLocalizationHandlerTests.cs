@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Contrib.HttpClient;
 using Nuages.Localization.MissingLocalization;
+using Nuages.Localization.Option;
 using Xunit;
 
 #endregion
