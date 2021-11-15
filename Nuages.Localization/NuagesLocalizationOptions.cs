@@ -12,8 +12,8 @@ public class NuagesLocalizationOptions
     public static string NuagesLocalization { get; set; } = "Nuages:Localization"; //Requires for options config
     public static string NuagesLocalizationValues { get; set; } = "Nuages:Localization:Values"; //Requires for options config
     
-    public string DefaultCulture { get; set; } = "en";
-    public string? LangClaim { get; set; }
+    public string FallbackCulture { get; set; } = "en-CA";
+    
     public string? MissingTranslationUrl { get; set; }
 
     // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
@@ -21,6 +21,6 @@ public class NuagesLocalizationOptions
     public List< string> Cultures { get; set; } = new();
 
     public string? AuthenticationScheme { get; set; }
-    // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
-    public bool AddDefaultRequestCultureProvider { get; set; } = true;
+    public string? LangClaim { get; set; }
+    public string? LangCookie { get; set; } = ".nuageslang";
 }

@@ -1,15 +1,11 @@
-using System;
 using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Nuages.Localization.CurrentLanguageProvider;
+using Nuages.Localization.LanguageProvider;
 
 namespace Nuages.Localization;
 
@@ -26,69 +22,34 @@ public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLoca
     {
         var supportedUiCultures = _nuageLocalizationOptions.Cultures.Select(c => new CultureInfo(c)).ToList();
 
-        var defaultCulture = _nuageLocalizationOptions.DefaultCulture;
+        var defaultCulture = _nuageLocalizationOptions.FallbackCulture;
 
         options.DefaultRequestCulture = new RequestCulture(defaultCulture, defaultCulture);
 
         options.SupportedCultures = supportedUiCultures;
         options.SupportedUICultures = supportedUiCultures;
 
-        if (_nuageLocalizationOptions.AddDefaultRequestCultureProvider)
             options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(context =>
             {
-                var isAuth = false;
-                ClaimsPrincipal? principal = null;
+                var languageProviders = context.RequestServices.GetServices<ILanguageProvider>();
+
+                string? lang = null;
                 
-                if (!string.IsNullOrEmpty(_nuageLocalizationOptions.AuthenticationScheme))
+                // ReSharper disable once LoopCanBeConvertedToQuery
+                foreach (var provider in languageProviders.Reverse())
                 {
-                    var authResult = context.AuthenticateAsync(_nuageLocalizationOptions.AuthenticationScheme).Result;
-                    if (authResult.Succeeded)
-                    {
-                        isAuth = true;
-                        principal = authResult.Principal;
-                    }
+                    lang = provider.GetLanguage();
+                    if (!string.IsNullOrEmpty(lang))
+                        break;
                 }
-
-                if (!isAuth)
-                {
-                    if (context.Request.Cookies.ContainsKey(".lang"))
-                    {
-                        var browserLang = context.Request.Cookies[".lang"];
-
-                        defaultCulture = NormalizeLanguage(browserLang);
-                    }
-                    else
-                    {
-                        var browserLang = context.Request.Headers["Accept-Language"].ToString().Split(";")
-                            .FirstOrDefault()?.Split(",").FirstOrDefault();
-
-                        defaultCulture = NormalizeLanguage(browserLang);
-                    }
-
-                    return Task.FromResult<ProviderCultureResult?>(
-                        new ProviderCultureResult(defaultCulture)); //Return null, will go to the next provder
-                }
-
-
-                var languageProvider = context.RequestServices.GetService<ICurrentLanguageProvider>();
-
-                var lang = languageProvider!.GetLanguage(principal!);
-
-                //Set the cookie, it will be used when visiting a page without being authenticated
-                context.Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
-                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(lang)),
-                    new CookieOptions
-                    {
-                        Expires = DateTimeOffset.UtcNow.AddYears(1)
-                    }
-                );
-
-                return Task.FromResult(new ProviderCultureResult(lang))!;
-            }));
+               
+                var result = new ProviderCultureResult(lang);
+                
+                return Task.FromResult(result)!;
+            })
+            
+            );
     }
     
-    private static string NormalizeLanguage(string? browserLang)
-    {
-        return string.IsNullOrEmpty(browserLang) || browserLang.StartsWith("en") ? "en-CA" : "fr-CA";
-    }
+
 }

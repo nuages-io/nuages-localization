@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 namespace Nuages.Localization.MissingLocalization;
 
+// ReSharper disable once UnusedType.Global
 public class MissingLocalizationHttpHandler : IMissingLocalizationHandler
 {
     public const string CantPostMissingTranslation = "CantPostMissingTranslation";

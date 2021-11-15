@@ -17,12 +17,12 @@ builder.Services.AddRazorPages()
 //Wire up nuages-localization stuff using StringProviderFromConfig as the localization souurce
 builder.Services.AddNuagesLocalization(options =>
     {
-        options.Cultures = new List<string> { "en-CA", "fr-CA" };
+        //options.Cultures = new List<string> { "es-SP", "fr-CA" }; //Automatically loaded from Configuration, must be set if alternate source is used
         options.AuthenticationScheme = null;
-        options.DefaultCulture = "en-CA";
+        options.FallbackCulture = "en-CA";
         options.LangClaim = null;
         options.MissingTranslationUrl = null;
-        options.AddDefaultRequestCultureProvider = true;
+        options.LangCookie = ".languagecookie";
 
     }
 ).AddStringProvider<StringLocalizerFactoryFromConfig, StringProviderFromConfig>();

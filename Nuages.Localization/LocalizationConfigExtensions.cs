@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Nuages.Localization.CurrentLanguageProvider;
+using Nuages.Localization.LanguageProvider;
 using Nuages.Localization.MissingLocalization;
 
 #endregion
@@ -32,6 +32,7 @@ public static class LocalizationConfigExtensions
         return builder;
     }
     
+    // ReSharper disable once UnusedMember.Global
     public static INuagesLocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
         IConfiguration configuration)
     {
@@ -65,7 +66,8 @@ public static class LocalizationConfigExtensions
             services.Configure(configure);
         
         services.AddSingleton<IConfigureOptions<RequestLocalizationOptions>, ConfigureRequestLocalizationOptions>();
-
+        services.AddSingleton<IConfigureOptions<NuagesLocalizationOptions>, ConfigureNuagesLocalizationOptions>();
+        
         services.PostConfigure<NuagesLocalizationOptions>(localizationOptions =>
         {
             var configErrors = ValidationErrors(localizationOptions).ToArray();
@@ -86,7 +88,13 @@ public static class LocalizationConfigExtensions
         services.AddScoped<IStringLocalizer, StringLocalizer>();
         services.AddScoped(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
         services.AddSingleton<IMissingLocalizationHandler, MissingLocalizationConsoleHandler>();
-        services.AddScoped<ICurrentLanguageProvider, FromClaimCurrentLanguageProvider>();
+        
+        services.AddScoped<ILanguageProvider, FromCulturesListLanguageProvider>();
+        services.AddScoped<ILanguageProvider, FromFallbackCultureLanguageProvider>();
+        services.AddScoped<ILanguageProvider, FromBrowserLanguageProvider>();
+        services.AddScoped<ILanguageProvider, FromAuthenticatedUserClaimLanguageProvider>();
+        
+        //services.AddScoped<ILanguageProvider, FromAuthenticatedUserClaimLanguageProvider>();
 
         return new NuagesLocalizationBuilder(services);
     }
