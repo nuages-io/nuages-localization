@@ -27,7 +27,7 @@ public class StringProviderFromConfig : IStringProvider
     {
         var normalizedName = name.Replace(".", ":");
         
-        var value = _configuration.GetSection($"{language}:{normalizedName}");
+        var value = _configuration.GetSection($"{NuagesLocalizationOptions.NuagesLocalizationValues}:{language}:{normalizedName}");
 
         return value?.Value;
     }

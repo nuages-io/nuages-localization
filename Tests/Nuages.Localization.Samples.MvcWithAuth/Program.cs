@@ -27,6 +27,7 @@ public class Program
             {
                 if (hostingContext.HostingEnvironment.IsDevelopment())
                     config.AddJsonFile("appsettings.local.json", true);
+                
                 config.AddJsonFileTranslation("Locales/en-CA.json");
                 config.AddJsonFileTranslation("Locales/fr-CA.json");
 

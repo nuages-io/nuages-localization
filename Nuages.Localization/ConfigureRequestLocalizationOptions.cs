@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -35,9 +36,20 @@ public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLoca
         if (_nuageLocalizationOptions.AddDefaultRequestCultureProvider)
             options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(context =>
             {
-                var authResult = context.AuthenticateAsync().Result;
+                var isAuth = false;
+                ClaimsPrincipal? principal = null;
                 
-                if (!authResult.Succeeded /*context.User.Identity == null || !context.User.Identity.IsAuthenticated*/)
+                if (!string.IsNullOrEmpty(_nuageLocalizationOptions.AuthenticationScheme))
+                {
+                    var authResult = context.AuthenticateAsync(_nuageLocalizationOptions.AuthenticationScheme).Result;
+                    if (authResult.Succeeded)
+                    {
+                        isAuth = true;
+                        principal = authResult.Principal;
+                    }
+                }
+
+                if (!isAuth)
                 {
                     if (context.Request.Cookies.ContainsKey(".lang"))
                     {
@@ -60,7 +72,7 @@ public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLoca
 
                 var languageProvider = context.RequestServices.GetService<ICurrentLanguageProvider>();
 
-                var lang = languageProvider!.GetLanguage(authResult.Principal!);
+                var lang = languageProvider!.GetLanguage(principal!);
 
                 //Set the cookie, it will be used when visiting a page without being authenticated
                 context.Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,

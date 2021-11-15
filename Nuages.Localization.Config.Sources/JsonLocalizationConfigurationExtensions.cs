@@ -18,7 +18,8 @@ public static class JsonLocalizationConfigurationExtensions
     public static IConfigurationBuilder AddJsonFileTranslation(this IConfigurationBuilder builder, string path,
         string? language = null, bool optional = false, bool reloadOnChange = false)
     {
-        if (string.IsNullOrEmpty(language)) language = Path.GetFileNameWithoutExtension(path);
+        if (string.IsNullOrEmpty(language)) 
+            language = Path.GetFileNameWithoutExtension(path);
 
         return builder.Add(new JsonConfigurationSource
         {
@@ -34,7 +35,8 @@ public static class JsonLocalizationConfigurationExtensions
     public static IConfigurationBuilder AddJsonHttpTranslation(
         this IConfigurationBuilder builder, string url, string? language = null, int expireInSeconds = 3600)
     {
-        if (string.IsNullOrEmpty(language)) language = Path.GetFileNameWithoutExtension(url);
+        if (string.IsNullOrEmpty(language)) 
+            language = Path.GetFileNameWithoutExtension(url);
 
         return builder.Add(new HttpConfigurationSource
         {
