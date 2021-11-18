@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Nuages.Localization.LanguageProvider;
+using Nuages.Localization.CultureProvider;
 using Nuages.Localization.MissingLocalization;
 using Nuages.Localization.Option;
 using Nuages.Localization.Storage.Config.Providers;
@@ -113,10 +113,10 @@ public static class LocalizationConfigExtensions
         services.AddScoped(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
         services.AddSingleton<IMissingLocalizationHandler, MissingLocalizationConsoleHandler>();
         
-        services.AddScoped<ILanguageProvider, FromCulturesListLanguageProvider>();
-        services.AddScoped<ILanguageProvider, FromFallbackCultureLanguageProvider>();
-        services.AddScoped<ILanguageProvider, FromBrowserLanguageProvider>();
-        services.AddScoped<ILanguageProvider, FromAuthenticatedUserClaimLanguageProvider>();
+        services.AddScoped<ICultureProvider, FromCulturesListCultureProvider>();
+        services.AddScoped<ICultureProvider, FromFallbackCultureProvider>();
+        services.AddScoped<ICultureProvider, FromBrowserCultureProvider>();
+        services.AddScoped<ICultureProvider, FromAuthenticatedUserClaimCultureProvider>();
 
         var builder = new LocalizationBuilder(services);
 

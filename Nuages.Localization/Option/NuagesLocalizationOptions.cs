@@ -21,6 +21,6 @@ public class NuagesLocalizationOptions
     public List< string> Cultures { get; set; } = new();
 
     public string? AuthenticationScheme { get; set; }
-    public string? LangClaim { get; set; }
+    public string? LangClaim { get; set; } = "NuagsLang";
     public string? LangCookie { get; set; } = ".nuageslang";
 }

@@ -8,7 +8,7 @@ namespace Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 public class JsonConfigurationSource : FileConfigurationSource
 {
-    public string Language { get; set; } = string.Empty;
+    public string Culture { get; set; } = string.Empty;
 
     /// <summary>
     ///     Builds the <see cref="JsonConfigurationProvider" /> for this source.
@@ -18,6 +18,6 @@ public class JsonConfigurationSource : FileConfigurationSource
     public override IConfigurationProvider Build(IConfigurationBuilder builder)
     {
         EnsureDefaults(builder);
-        return new JsonConfigurationProvider(this, Language);
+        return new JsonConfigurationProvider(this, Culture);
     }
 }

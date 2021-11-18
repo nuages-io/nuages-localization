@@ -15,13 +15,13 @@ namespace Nuages.Localization.Storage.Config.Sources;
 internal class HttpConfigurationProvider : ConfigurationProvider, IDisposable
 {
     private readonly HttpConfigurationSource _apiConfigurationSource;
-    private readonly string _language;
+    private readonly string _culture;
     private Timer? _timer;
 
-    public HttpConfigurationProvider(HttpConfigurationSource apiConfigurationSource, string language)
+    public HttpConfigurationProvider(HttpConfigurationSource apiConfigurationSource, string culture)
     {
         _apiConfigurationSource = apiConfigurationSource;
-        _language = language;
+        _culture = culture;
 
         ConfigureTimer();
     }
@@ -52,7 +52,7 @@ internal class HttpConfigurationProvider : ConfigurationProvider, IDisposable
 
         var stream = client.GetStreamAsync(_apiConfigurationSource.Url).Result;
 
-        Data = JsonConfigurationFileParser.Parse(stream, _language);
+        Data = JsonConfigurationFileParser.Parse(stream, _culture);
 
         stream.Close();
     }

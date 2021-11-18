@@ -5,6 +5,6 @@ namespace Nuages.Localization;
 
 public interface IStringProvider
 {
-    IEnumerable<LocalizedString> GetAllStrings(string language);
-    string? GetString(string name, string language);
+    IEnumerable<LocalizedString> GetAllStrings(string culture);
+    string? GetString(string name, string culture);
 }

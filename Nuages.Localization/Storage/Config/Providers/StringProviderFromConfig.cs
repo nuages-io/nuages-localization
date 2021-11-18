@@ -15,20 +15,20 @@ public class StringProviderFromConfig : IStringProvider
         _configuration = configuration;
     }
 
-    public IEnumerable<LocalizedString> GetAllStrings(string language)
+    public IEnumerable<LocalizedString> GetAllStrings(string culture)
     {
-        var lang = _configuration.GetSection(language);
+        var lang = _configuration.GetSection(culture);
 
         //The AsEnumerable extension method can't be mock with Moq. Covered by the integration tests
         return lang.AsEnumerable().Where(s => !string.IsNullOrEmpty(s.Value))
             .Select(s => new LocalizedString(s.Key, s.Value));
     }
 
-    public string? GetString(string name, string language)
+    public string? GetString(string name, string culture)
     {
         var normalizedName = name.Replace(".", ":");
         
-        var value = _configuration.GetSection($"{NuagesLocalizationOptions.NuagesLocalizationValues}:{language}:{normalizedName}");
+        var value = _configuration.GetSection($"{NuagesLocalizationOptions.NuagesLocalizationValues}:{culture}:{normalizedName}");
 
         return value?.Value;
     }

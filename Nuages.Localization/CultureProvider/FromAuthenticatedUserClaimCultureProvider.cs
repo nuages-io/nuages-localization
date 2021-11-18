@@ -8,21 +8,21 @@ using Nuages.Localization.Option;
 
 #endregion
 
-namespace Nuages.Localization.LanguageProvider;
+namespace Nuages.Localization.CultureProvider;
 
 // ReSharper disable once UnusedType.Global
-public class FromAuthenticatedUserClaimLanguageProvider : ILanguageProvider
+public class FromAuthenticatedUserClaimCultureProvider : ICultureProvider
 {
     private readonly IHttpContextAccessor _contextAccessor;
     private readonly NuagesLocalizationOptions _nuagesLocalizationOption;
 
-    public FromAuthenticatedUserClaimLanguageProvider(IHttpContextAccessor contextAccessor, IOptions<NuagesLocalizationOptions> options)
+    public FromAuthenticatedUserClaimCultureProvider(IHttpContextAccessor contextAccessor, IOptions<NuagesLocalizationOptions> options)
     {
         _contextAccessor = contextAccessor;
         _nuagesLocalizationOption = options.Value;
     }
 
-    public string? GetLanguage()
+    public string? GetCulture()
     {
         if (string.IsNullOrEmpty(_nuagesLocalizationOption.LangClaim) || string.IsNullOrEmpty(_nuagesLocalizationOption.AuthenticationScheme))
         {

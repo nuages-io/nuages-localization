@@ -6,18 +6,18 @@ namespace Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 public class JsonConfigurationProvider : FileConfigurationProvider
 {
-    private readonly string _language;
+    private readonly string _culture;
 
     /// <summary>
     ///     Initializes a new instance with the specified source.
     /// </summary>
     /// <param name="source">The source settings.</param>
-    /// <param name="language">The language settings.</param>
+    /// <param name="culture">The language settings.</param>
     // ReSharper disable once SuggestBaseTypeForParameter
     // ReSharper disable once SuggestBaseTypeForParameterInConstructor
-    public JsonConfigurationProvider(JsonConfigurationSource source, string language) : base(source)
+    public JsonConfigurationProvider(JsonConfigurationSource source, string culture) : base(source)
     {
-        _language = language;
+        _culture = culture;
     }
 
     /// <summary>
@@ -26,6 +26,6 @@ public class JsonConfigurationProvider : FileConfigurationProvider
     /// <param name="stream">The stream to read.</param>
     public override void Load(Stream stream)
     {
-        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_language}");
+        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_culture}");
     }
 }

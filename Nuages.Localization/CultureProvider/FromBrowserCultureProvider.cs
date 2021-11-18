@@ -3,23 +3,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Nuages.Localization.Option;
 
-
-namespace Nuages.Localization.LanguageProvider;
+namespace Nuages.Localization.CultureProvider;
 
 // ReSharper disable once UnusedType.Global
-public class FromBrowserLanguageProvider : ILanguageProvider
+public class FromBrowserCultureProvider : ICultureProvider
 {
     private readonly IHttpContextAccessor _contextAccessor;
     private readonly IOptions<NuagesLocalizationOptions> _options;
 
-    public FromBrowserLanguageProvider(IHttpContextAccessor contextAccessor, IOptions<NuagesLocalizationOptions> options)
+    public FromBrowserCultureProvider(IHttpContextAccessor contextAccessor, IOptions<NuagesLocalizationOptions> options)
     {
         _contextAccessor = contextAccessor;
         _options = options;
     }
     
     // ReSharper disable once ReturnTypeCanBeNotNullable
-    public string? GetLanguage()
+    public string? GetCulture()
     {
         var context = _contextAccessor.HttpContext!;
         string? lang;

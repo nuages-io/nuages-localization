@@ -6,8 +6,10 @@
         <IsPackable>true</IsPackable>
         <TargetFrameworks>net6.0;netcoreapp3.1</TargetFrameworks>
        <LangVersion>10</LangVersion>
-  
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
-
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 </Project>

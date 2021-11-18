@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Nuages.Localization.Tests;
 
-public class FromClaimCurrentLanguageProviderTests
+public class FromClaimCurrentCultureProviderTests
 {
     //private readonly ILanguageProvider _languageProvider;
 
@@ -22,7 +22,7 @@ public class FromClaimCurrentLanguageProviderTests
     // }
 
     [Fact]
-    public void ShouldReturnCurrentLanguageWithSuccess()
+    public void ShouldReturnCurrentCultureWithSuccess()
     {
         // var claims = new List<Claim>
         // {

@@ -56,7 +56,7 @@ public class StringLocalizerTests
     }
 
     [Fact]
-    public void ShouldReturnStringValueFromBaseLanguageWithSuccess()
+    public void ShouldReturnStringValueFromBaseCultureWithSuccess()
     {
         const string name = "name";
 

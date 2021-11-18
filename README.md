@@ -161,7 +161,7 @@ public class RegisterViewModel
 
 You may already have JSON files ready to use. You can load them directly from a JSON file included in your project of from an HTTP source
 
-External files should provide **one language per file**. By default, the file name is used as the language. You may provide the language directly.
+External files should provide **one Culture per file**. By default, the file name is used as the culture. You may provide the culture directly.
 
 The format should be similar to this, starting at the root.
 
@@ -188,7 +188,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
             //To load from a file included in your project
             config.AddJsonFileTranslation("Locales/french-canadian.json","fr-CA");
 
-            //To load from a file on the Web, use filename as language
+            //To load from a file on the Web, use filename as culture
             config.AddJsonHttpTranslation("https://here-goes-your-url.com/fr-CA.json");
         })
         .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
@@ -206,7 +206,7 @@ builder.Configuration.AddJsonFileTranslation("Locales/en-CA.json")
 ```
 
 
-# Custom loaders
+# Custom loader
 
 By default, Nuages.Localization load the translation information from the Configuration system. That means you can implement a IConfigurationSource and ConfigurationProvider that 
 load data from any source into the Configuration system and that will work just fine.
@@ -231,3 +231,15 @@ You just have to provide your own IStringProvider and IStringLocalizerFactory im
 
 # Setting the current culture
 
+Nuages.Localization try to determine the current cullture in the following order. The first returned value is used.
+
+- If the user is authenticated, it will use the value of the ".lang" claim by default. You may change the claim name by overriding the LangClaim option. The AuthenticatedScheme must be also provided.
+- If he user is not authenticated, it will firt try to use the current culture selected the browser settings.
+- If the culture of the browser was not available, it will use the FallbackCulture.
+- If the FallbackCulture is not valid, it will use the first configured culture.
+
+You can provide your own methodology by implementing the ICultureProvider interface.
+
+```csharp
+services.AddScoped<ICultureProvider, MyCultureProvider>();      
+```

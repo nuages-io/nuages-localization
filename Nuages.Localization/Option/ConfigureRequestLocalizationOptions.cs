@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Nuages.Localization.LanguageProvider;
+using Nuages.Localization.CultureProvider;
 
 namespace Nuages.Localization.Option;
 
@@ -31,19 +31,19 @@ public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLoca
 
             options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(context =>
             {
-                var languageProviders = context.RequestServices.GetServices<ILanguageProvider>();
+                var cultureProviders = context.RequestServices.GetServices<ICultureProvider>();
 
-                string? lang = null;
+                string? culture = null;
                 
                 // ReSharper disable once LoopCanBeConvertedToQuery
-                foreach (var provider in languageProviders.Reverse())
+                foreach (var provider in cultureProviders.Reverse())
                 {
-                    lang = provider.GetLanguage();
-                    if (!string.IsNullOrEmpty(lang))
+                    culture = provider.GetCulture();
+                    if (!string.IsNullOrEmpty(culture))
                         break;
                 }
                
-                var result = new ProviderCultureResult(lang);
+                var result = new ProviderCultureResult(culture);
                 
                 return Task.FromResult(result)!;
             })
