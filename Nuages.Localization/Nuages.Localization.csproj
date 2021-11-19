@@ -10,7 +10,7 @@
 
         <Title>Nuages.Localization</Title>
         <Authors>Nuages.io</Authors>
-        <Description>Nuages.Localization is a .NET Core C# library that provides functionnalities to easylly add localization support to your Asp.net core application.</Description>
+        <Description>Nuages.Localization is a .NET Core C# library that provides functionalities to easily add localization support to your Asp.net core application.</Description>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>nuages.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
