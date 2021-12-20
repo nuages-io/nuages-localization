@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
+using Nuages.Localization.Option;
 using Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 #endregion
@@ -52,7 +53,7 @@ internal class HttpConfigurationProvider : ConfigurationProvider, IDisposable
 
         var stream = client.GetStreamAsync(_apiConfigurationSource.Url).Result;
 
-        Data = JsonConfigurationFileParser.Parse(stream, _culture);
+        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_culture}");
 
         stream.Close();
     }
