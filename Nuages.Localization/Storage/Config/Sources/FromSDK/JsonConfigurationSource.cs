@@ -2,8 +2,6 @@
 
 #endregion
 
-using Microsoft.Extensions.Configuration;
-
 namespace Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 public class JsonConfigurationSource : FileConfigurationSource

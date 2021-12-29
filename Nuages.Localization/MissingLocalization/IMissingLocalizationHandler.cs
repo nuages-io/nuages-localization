@@ -1,7 +1,5 @@
 #region
 
-using System.Threading.Tasks;
-
 #endregion
 
 namespace Nuages.Localization.MissingLocalization;

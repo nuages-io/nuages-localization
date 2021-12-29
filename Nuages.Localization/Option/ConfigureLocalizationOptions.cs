@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace Nuages.Localization.Option;

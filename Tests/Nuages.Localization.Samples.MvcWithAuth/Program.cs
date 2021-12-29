@@ -1,9 +1,6 @@
 #region
 
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Nuages.Localization.Storage.Config.Sources;
 
 #endregion

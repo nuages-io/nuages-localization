@@ -1,8 +1,6 @@
 #region
 
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using Microsoft.Extensions.Configuration;
 using Nuages.Localization.Storage.Config.Sources.FromSDK;
 
 #endregion

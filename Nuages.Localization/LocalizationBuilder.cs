@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Nuages.Localization;
 
 public class LocalizationBuilder : ILocalizationBuilder

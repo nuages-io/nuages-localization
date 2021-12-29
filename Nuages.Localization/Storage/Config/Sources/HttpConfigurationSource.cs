@@ -1,7 +1,6 @@
 #region
 
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.Configuration;
 
 #endregion
 

@@ -1,8 +1,6 @@
 #region
 
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Microsoft.Extensions.Localization;
 using Moq;
 using Nuages.Localization.MissingLocalization;

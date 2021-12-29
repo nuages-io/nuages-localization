@@ -1,5 +1,3 @@
-using System.IO;
-using Microsoft.Extensions.Configuration;
 using Nuages.Localization.Option;
 
 namespace Nuages.Localization.Storage.Config.Sources.FromSDK;

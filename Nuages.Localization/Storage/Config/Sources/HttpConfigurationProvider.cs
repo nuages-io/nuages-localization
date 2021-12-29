@@ -1,10 +1,6 @@
 #region
 
-using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
-using System.Threading;
-using Microsoft.Extensions.Configuration;
 using Nuages.Localization.Option;
 using Nuages.Localization.Storage.Config.Sources.FromSDK;
 

@@ -1,7 +1,5 @@
 #region
 
-using System.Collections.Generic;
-
 #endregion
 
 namespace Nuages.Localization.Option;
