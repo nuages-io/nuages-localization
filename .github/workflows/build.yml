@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: dotnet build --no-restore -c RELEASE
       - name: Test
-        run: dotnet test Test/Nuages.Localization.Tests/Nuages.Localization.Tests.csproj -c RELEASE
+        run: dotnet test Tests/Nuages.Localization.Tests/Nuages.Localization.Tests.csproj -c RELEASE
    
       
    
