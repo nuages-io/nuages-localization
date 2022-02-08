@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <UserSecretsId>aspnet-Nuages.Localization.Samples.MvcWithAuth-7C0EEAD7-6D95-47A6-9033-9EC754C49AE1</UserSecretsId>
         <LangVersion>10</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
