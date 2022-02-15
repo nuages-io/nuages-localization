@@ -59,35 +59,6 @@ Modify _ViewStart.cshtml to add thos lines
 
 ```
 
-### .NET Core 3.1, 5.0
-
-Modify your Startup.cs code (ConfigureServices) and add a call to AddNuagesLocalization() to your MvcBuilder.
-
-````csharp
-services.AddRazorPages()
-    .AddNuagesLocalization(options =>
-    {
-    }
-);
-                
-//or
-
-services.AddControllersWithViews()
-    .AddNuagesLocalization(options =>
-    {
-    }
-);
-````
-
-Add a call to the Configure startup method
-
-```csharp
-app.UseRequestLocalization();
-```
-
-
-### .NET 6.0 (with merged Startup.cs and Programs.cs)
-
 Modify your Program.cs code and add a call to AddNuagesLocalization() to your MvcBuilder.
 
 ```csharp
@@ -175,27 +146,6 @@ The format should be similar to this, starting at the root.
 }
 ```
 
-### .NET Core 3.1, 5.0
-
-You need to load those files in the CreateHostBuilder method of the Program class.
-
-```csharp
-public static IHostBuilder CreateHostBuilder(string[] args)
-{
-    return Host.CreateDefaultBuilder(args)
-        .ConfigureAppConfiguration((hostingContext, config) =>
-        {           
-            //To load from a file included in your project
-            config.AddJsonFileTranslation("Locales/french-canadian.json","fr-CA");
-
-            //To load from a file on the Web, use filename as culture
-            config.AddJsonHttpTranslation("https://here-goes-your-url.com/fr-CA.json");
-        })
-        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-}    
-```
-
-### .NET 6.0 (with merged Startup.cs and Programs.cs)
 
 ```csharp
 var builder = WebApplication.CreateBuilder(args);

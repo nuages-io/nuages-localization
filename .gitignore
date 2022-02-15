@@ -18,3 +18,4 @@ tailwind-output.css
 .DS_Store
 Tests/.DS_Store
 app.db
+.idea
