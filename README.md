@@ -1,6 +1,8 @@
-# Nuages.Localization <img alt="Nuget" src="https://img.shields.io/nuget/v/Nuages.Localization?style=flat-square"> ![example workflow](https://github.com/nuages-io/nuages-localization/actions/workflows/publish.yml/badge.svg)
+# Nuages.Localization 
 
+[![Nuages.Localization](https://img.shields.io/nuget/v/Nuages.Localization?style=flat-square&label=Nuages.Localization)](https://www.nuget.org/packages/Nuages.Localization/)
 
+[![example workflow](https://github.com/nuages-io/nuages-localization/actions/workflows/publish.yml/badge.svg)](https://github.com/nuages-io/nuages-localization/actions/workflows/nuget.yml)
 
 Nuages.Localization provide features to easily add localization to your ASP.NET Core projects.
 
