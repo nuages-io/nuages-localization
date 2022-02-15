@@ -8,37 +8,6 @@ By default, Nuages.Localization provide support for translations included in a g
 That means that translations can be loaded from appSettings.json files or from external source.
 
 
-###Example appsettings.json
-
-```json
-{
-  "Nuages" :
-  {
-    "Localization":
-    {
-      "Values" :
-      {
-        "fr-CA" :
-        {
-          "Item": "Il s'agit d'un test",
-          "Parent":
-          {
-            "Child" : "C'est un item enfant"
-          }
-        },
-        "en-CA" :
-        {
-          "Item": "This is a Test",
-          "Parent":
-          {
-            "Child" : "This is a child item"
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 # Installation
 
@@ -144,6 +113,39 @@ public class RegisterViewModel
 }
 ```
 
+# Load string from appsettings.json
+
+Strings can be directly included in appsettings.json.
+
+```json
+{
+  "Nuages" :
+  {
+    "Localization":
+    {
+      "Values" :
+      {
+        "fr-CA" :
+        {
+          "Item": "Il s'agit d'un test",
+          "Parent":
+          {
+            "Child" : "C'est un item enfant"
+          }
+        },
+        "en-CA" :
+        {
+          "Item": "This is a Test",
+          "Parent":
+          {
+            "Child" : "This is a child item"
+          }
+        }
+      }
+    }
+  }
+}
+```
 # Load external JSON files
 
 You may already have JSON files ready to use. You can load them directly from a JSON file included in your project of from an HTTP source
@@ -213,7 +215,7 @@ You just have to provide your own IStringProvider and IStringLocalizerFactory im
 
 Two samples are provided
 
-### Nuages.Localization.Samples
+### [Nuages.Localization.Samples](https://github.com/nuages-io/nuages-localization/tree/main/Tests/Nuages.Localization.Samples.MvcWithAuth)
 
 What it demonstrate
 
@@ -222,7 +224,7 @@ What it demonstrate
 - Current language set to current browser language (must be 'en' or 'fr', otherwise fallback to 'en')
 
 
-### Nuages.Localization.Samples.MvcWithAuth
+### [Nuages.Localization.Samples.MvcWithAuth](https://github.com/nuages-io/nuages-localization/tree/main/Tests/Nuages.Localization.Samples)
 
 What it demonstrate
 
