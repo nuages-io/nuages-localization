@@ -194,6 +194,9 @@ You can provide your own methodology by implementing the ICultureProvider interf
 ```csharp
 services.AddScoped<ICultureProvider, MyCultureProvider>();      
 ```
+IMPORTANT! ICultureProvider implementations are called in the reverse order they are added to the ServicesCollection. The last one added will be the first called. 
+
+The first to respond with a value (not null) provide the current culture.
 
 # Custom loader
 
@@ -204,7 +207,7 @@ See the [Implement a custom configuration provider in .NET](https://docs.microso
 
 You need to put the values in a hierarchy that has the same root as **NuagesLocalizationOptions.NuagesLocalizationValues**
 
-- See appsettings.json file sample at the top of this page. 
+- See appsettings.json file sample above. 
 - See [HttpConfigurationProvider.cs](https://github.com/nuages-io/nuages-localization/blob/main/Nuages.Localization/Storage/Config/Sources/HttpConfigurationProvider.cs)
   and [HttpConfigurationSource.cs](https://github.com/nuages-io/nuages-localization/blob/main/Nuages.Localization/Storage/Config/Sources/HttpConfigurationSource.cs) for a sample.
 
