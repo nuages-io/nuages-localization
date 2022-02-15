@@ -49,15 +49,6 @@ Add a reference to nuget package Nuages.Localization in your project.
 dotnet add package  Nuages.Localization
 ```
 
-Modify _ViewStart.cshtml to add thos lines
-
-```html
-
-<!-- Add those lines-->
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
-
-```
 
 Modify your Program.cs code and add a call to AddNuagesLocalization() to your MvcBuilder.
 
@@ -68,11 +59,36 @@ builder.Services.AddRazorPages()
 builder.Services.AddControllersWithViews()
                 .AddNuagesLocalization();        
 ```
+By default, options are loaded from the appsettings.json. You can override the value when calling AssNuagesLocalization
+
+```csharp
+services.AddControllersWithViews()
+    .AddNuagesLocalization(config =>
+    {
+        config.Cultures = new List<string> {"fr-CA","en-CA"}; 
+        config.FallbackCulture = "fr-CA"; 
+        config.LangCookie = ".lang";
+        config.LangClaim = "lang";
+        config.LangClaimAuthenticationScheme = IdentityConstants.ApplicationScheme;
+        config.MissingTranslationUrl = "http://[my-webhook-url]";
+    });      
+```
 
 Add a call to the Configure startup method
 
 ```csharp
 app.UseRequestLocalization();
+```
+
+
+Modify _ViewStart.cshtml to add those lines
+
+```html
+
+<!-- Add those lines-->
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 ```
 
 # Usage
@@ -155,6 +171,20 @@ builder.Configuration.AddJsonFileTranslation("Locales/en-CA.json")
                      .AddJsonHttpTranslation("https://here-goes-your-url.com/fr-CA.json");      
 ```
 
+# Setting the current culture
+
+Nuages.Localization try to determine the current cullture in the following order. The first returned value is used.
+
+- If the user is authenticated, it will use the value of the ".lang" claim by default. You may change the claim name by overriding the LangClaim option. The LangClaimAuthenticatedScheme must be also provided.
+- If he user is not authenticated, it will firt try to use the current culture selected the browser settings.
+- If the culture of the browser was not available, it will use the FallbackCulture.
+- If the FallbackCulture is not valid, it will use the first configured culture.
+
+You can provide your own methodology by implementing the ICultureProvider interface.
+
+```csharp
+services.AddScoped<ICultureProvider, MyCultureProvider>();      
+```
 
 # Custom loader
 
@@ -179,17 +209,25 @@ You just have to provide your own IStringProvider and IStringLocalizerFactory im
 - See [StringLocalizerFactory.cs](https://github.com/nuages-io/nuages-localization/blob/main/Nuages.Localization/Storage/Config/Providers/StringLocalizerFactory.cs)
   and [StringProviderFromConfig.cs](https://github.com/nuages-io/nuages-localization/blob/main/Nuages.Localization/Storage/Config/Providers/StringProviderFromConfig.cs) for a sample.
 
-# Setting the current culture
+# Samples
 
-Nuages.Localization try to determine the current cullture in the following order. The first returned value is used.
+Two samples are provided
 
-- If the user is authenticated, it will use the value of the ".lang" claim by default. You may change the claim name by overriding the LangClaim option. The AuthenticatedScheme must be also provided.
-- If he user is not authenticated, it will firt try to use the current culture selected the browser settings.
-- If the culture of the browser was not available, it will use the FallbackCulture.
-- If the FallbackCulture is not valid, it will use the first configured culture.
+### Nuages.Localization.Samples
 
-You can provide your own methodology by implementing the ICultureProvider interface.
+What it demonstrate
 
-```csharp
-services.AddScoped<ICultureProvider, MyCultureProvider>();      
-```
+- Anonymous web application
+- Load string from appsettings.json
+- Current language set to current browser language (must be 'en' or 'fr', otherwise fallback to 'en')
+
+
+### Nuages.Localization.Samples.MvcWithAuth
+
+What it demonstrate
+
+- Authenticated Web application using Asp.Net Identity
+- Load string from external json files
+- Data annotations localization
+- Current language is set from ApplicationUser.Lang property (See IdentityCultureProvider)
+- Current language saved to .nuagelang cookie. 

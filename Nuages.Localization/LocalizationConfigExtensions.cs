@@ -105,13 +105,13 @@ public static class LocalizationConfigExtensions
         services.AddScoped(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
         services.AddSingleton<IMissingLocalizationHandler, MissingLocalizationConsoleHandler>();
         
-        services.AddScoped<ICultureProvider, FromCulturesListCultureProvider>();
-        services.AddScoped<ICultureProvider, FromFallbackCultureProvider>();
-        services.AddScoped<ICultureProvider, FromBrowserCultureProvider>();
-        services.AddScoped<ICultureProvider, FromAuthenticatedUserClaimCultureProvider>();
-
         var builder = new LocalizationBuilder(services);
-
+        
+        AddCultureProvider<FromCulturesListCultureProvider>(builder);
+        AddCultureProvider<FromFallbackCultureProvider>(builder);
+        AddCultureProvider<FromBrowserCultureProvider>(builder);
+        AddCultureProvider<FromAuthenticatedUserClaimCultureProvider>(builder);
+      
         builder.AddDefaultStringProvider();
 
         return builder;
@@ -131,5 +131,12 @@ public static class LocalizationConfigExtensions
         if (services.All(x => x.ServiceType != typeof(IHttpContextAccessor))) services.AddHttpContextAccessor();
 
         if (services.All(x => x.ServiceType != typeof(IHttpClientFactory))) services.AddHttpClient();
+    }
+    
+    public static ILocalizationBuilder AddCultureProvider<T>(this ILocalizationBuilder builder) where T: class, ICultureProvider 
+    {
+        builder.Services.AddScoped<ICultureProvider, T>();
+
+        return builder;
     }
 }

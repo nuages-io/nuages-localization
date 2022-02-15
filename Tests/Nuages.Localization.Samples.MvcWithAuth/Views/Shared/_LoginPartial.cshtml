@@ -1,10 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using Nuages.Localization.Samples.MvcWithAuth.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        <li class="nav-item">
+            <a class="nav-link" style="color: blue" href="/home/changeLanguage?lang=fr-CA" >Lang=fr-CA</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " style="color: blue" href="/home/changeLanguage?lang=en-CA">Lang=en-CA</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Hello"] @User.Identity.Name!</a>
         </li>

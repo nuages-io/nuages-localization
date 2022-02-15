@@ -32,11 +32,24 @@ public class FromBrowserCultureProvider : ICultureProvider
                 .FirstOrDefault()?.Split(",").FirstOrDefault();
         }
 
-        var finalCulture = _options.Value.Cultures.FirstOrDefault(c => c.StartsWith($"{lang}-"));
+        string? finalCulture = null;
+
+        if (!string.IsNullOrEmpty(lang))
+        {
+            //Try to find exact match
+            if (lang.Contains("-"))
+            {
+                finalCulture = _options.Value.Cultures.FirstOrDefault(c => c == lang);
+            }
+
+            //Find first with closest match
+            if (string.IsNullOrEmpty(finalCulture))
+            {
+                finalCulture = _options.Value.Cultures.FirstOrDefault(c => c.StartsWith($"{lang.Split('-').First()}-")); 
+            }
+        }
 
         var val = string.IsNullOrEmpty(finalCulture) ?  "en-CA" : finalCulture;
-
-        context.Response.Cookies.Append(cookieName!, lang!);
 
         return val;
     }

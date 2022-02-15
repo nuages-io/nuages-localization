@@ -9,4 +9,9 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Nuages.Localization\Nuages.Localization.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Locales\en-CA.json" />
+      <_ContentIncludedByDefault Remove="Locales\fr-CA.json" />
+    </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ public class MissingLocalizationHttpHandler : IMissingLocalizationHandler
         {
             var data = new
             {
-                text = $"MissingTranslation:{name}"
+                text = name
             };
 
             var json = JsonSerializer.Serialize(data);

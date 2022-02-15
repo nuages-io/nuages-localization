@@ -25,12 +25,12 @@ public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLoca
         options.SupportedCultures = supportedUiCultures;
         options.SupportedUICultures = supportedUiCultures;
 
-            options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(context =>
+        options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(context =>
             {
                 var cultureProviders = context.RequestServices.GetServices<ICultureProvider>();
 
                 string? culture = null;
-                
+
                 // ReSharper disable once LoopCanBeConvertedToQuery
                 foreach (var provider in cultureProviders.Reverse())
                 {
@@ -38,14 +38,11 @@ public class ConfigureRequestLocalizationOptions : IConfigureOptions<RequestLoca
                     if (!string.IsNullOrEmpty(culture))
                         break;
                 }
-               
+
                 var result = new ProviderCultureResult(culture);
-                
+
                 return Task.FromResult(result)!;
             })
-            
-            );
+        );
     }
-    
-
 }

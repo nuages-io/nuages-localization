@@ -22,12 +22,12 @@ public class FromAuthenticatedUserClaimCultureProvider : ICultureProvider
 
     public string? GetCulture()
     {
-        if (string.IsNullOrEmpty(_nuagesLocalizationOption.LangClaim) || string.IsNullOrEmpty(_nuagesLocalizationOption.AuthenticationScheme))
+        if (string.IsNullOrEmpty(_nuagesLocalizationOption.LangClaim) || string.IsNullOrEmpty(_nuagesLocalizationOption.LangClaimAuthenticationScheme))
         {
             return null;
         }
         
-        var authResult = _contextAccessor.HttpContext!.AuthenticateAsync(_nuagesLocalizationOption.AuthenticationScheme).Result;
+        var authResult = _contextAccessor.HttpContext!.AuthenticateAsync(_nuagesLocalizationOption.LangClaimAuthenticationScheme).Result;
         if (!authResult.Succeeded)
             return null;
         
@@ -37,6 +37,9 @@ public class FromAuthenticatedUserClaimCultureProvider : ICultureProvider
         var langClaim = authResult.Principal.Claims.SingleOrDefault(c => c.Type == claimName);
         if (langClaim != null) 
             lang = langClaim.Value;
+        
+        if (!string.IsNullOrEmpty(_nuagesLocalizationOption.LangCookie))
+            _contextAccessor.HttpContext!.Response.Cookies.Append(_nuagesLocalizationOption.LangCookie, lang!);
         
         return lang;
 

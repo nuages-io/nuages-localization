@@ -22,13 +22,12 @@ public class Program
         return Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
-                if (hostingContext.HostingEnvironment.IsDevelopment())
-                    config.AddJsonFile("appsettings.local.json", true);
+                config.AddJsonFile("appsettings.local.json", true);
                 
                 config.AddJsonFileTranslation("Locales/en-CA.json");
                 config.AddJsonFileTranslation("Locales/fr-CA.json");
 
-
+                // Fille may also be loaded using Http request
                 //config.AddJsonHttpTranslation("https://s3.ca-central-1.amazonaws.com/public.nuages.org/fr.json");
             })
             .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });

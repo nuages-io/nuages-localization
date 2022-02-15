@@ -25,12 +25,25 @@ public class Startup
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(
                 Configuration.GetConnectionString("DefaultConnection")));
-        services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        
+        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
         
         services.AddControllersWithViews();
         services.AddRazorPages()
-            .AddNuagesLocalization(Configuration);
+            .AddNuagesLocalization(Configuration)
+            .AddCultureProvider<IdentityCultureProvider>();
+
+        // services.AddControllersWithViews()
+        //     .AddNuagesLocalization(config =>
+        //     {
+        //         config.Cultures = new List<string> {"fr-CA","en-CA"}; //Available cultures, must have a least One (1)
+        //         config.FallbackCulture = "fr-CA"; //Optional: Culture to use when no culture found using other mechanism. Otherwise use the first item in Cultures
+        //         config.LangCookie = ".lang"; //Optional: Cookie to look for to determine the current culture (Use Accept-Language header otherwise)
+        //         config.LangClaim = "lang"; //Optional: The claim to loof for in principal (from LangClaimAuthenticationScheme)
+        //         config.LangClaimAuthenticationScheme = IdentityConstants.ApplicationScheme; //Optional: AuthenticationSchema for lang claim
+        //         config.MissingTranslationUrl = "http://[my-webhook-url]"; //Optional: If provided, the Url will receve a notification when a localized string is not found. By default, that will be outputed to the Console.
+        //     });     
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
