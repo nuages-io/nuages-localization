@@ -2,8 +2,10 @@
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using Moq;
 using Nuages.Localization.MissingLocalization;
+using Nuages.Localization.Option;
 using Nuages.Localization.Storage.Config.Providers;
 using Xunit;
 
@@ -21,7 +23,7 @@ public class StringLocalizerFactoryTests
 
     public StringLocalizerFactoryTests()
     {
-        _factory = new StringLocalizerFactoryFromConfig(_configuration.Object, new [] {_missingLocalizationHandler.Object} );
+        _factory = new StringLocalizerFactoryFromConfig(_configuration.Object, new [] {_missingLocalizationHandler.Object}, Options.Create(new NuagesLocalizationOptions()) );
     }
 
     [Fact]

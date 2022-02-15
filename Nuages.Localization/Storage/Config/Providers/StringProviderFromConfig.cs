@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using Nuages.Localization.Option;
 
 namespace Nuages.Localization.Storage.Config.Providers;
@@ -6,10 +7,12 @@ namespace Nuages.Localization.Storage.Config.Providers;
 public class StringProviderFromConfig : IStringProvider
 {
     private readonly IConfiguration _configuration;
+    private readonly NuagesLocalizationOptions _options;
 
-    public StringProviderFromConfig(IConfiguration configuration)
+    public StringProviderFromConfig(IConfiguration configuration, IOptions<NuagesLocalizationOptions> options)
     {
         _configuration = configuration;
+        _options = options.Value;
     }
 
     public IEnumerable<LocalizedString> GetAllStrings(string culture)
@@ -23,7 +26,7 @@ public class StringProviderFromConfig : IStringProvider
 
     public string? GetString(string name, string culture)
     {
-        var normalizedName = name.Replace(".", ":");
+        var normalizedName = _options.SupportDotNotation ? name.Replace(".", ":") : name;
         
         var value = _configuration.GetSection($"{NuagesLocalizationOptions.NuagesLocalizationValues}:{culture}:{normalizedName}");
 

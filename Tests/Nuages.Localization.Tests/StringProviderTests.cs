@@ -1,6 +1,7 @@
 #region
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Moq;
 using Nuages.Localization.Option;
 using Nuages.Localization.Storage.Config.Providers;
@@ -17,7 +18,7 @@ public class StringProviderTests
 
     public StringProviderTests()
     {
-        _stringProviderFromConfig = new StringProviderFromConfig(_configuration.Object);
+        _stringProviderFromConfig = new StringProviderFromConfig(_configuration.Object, Options.Create(new NuagesLocalizationOptions()));
     }
 
     [Fact]

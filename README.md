@@ -1,11 +1,11 @@
 # Nuages.Localization
 
-Nuages.Localization provide features to easily add localization to your ASP.net Core projects.
+Nuages.Localization provide features to easily add localization to your ASP.NET Core projects.
 
 See [Globalization and localization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-6.0) for more information on this subject.
 
 By default, Nuages.Localization provide support for translations included in a generic JSON files. The internal storage used is the Configuration system. 
-That means that translations can be loaded from appSettings.json files or from external source.
+That means that translations can be loaded from appsettings.json files or from external source.
 
 
 
@@ -83,6 +83,13 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         Model.Value = _stringLocalizer["key-goes-here"];
+        
+        //You may use standard key format to access the hierarchical values
+        Model.Value = _stringLocalizer["part_1:part_2"];
+        
+        //You may also use a dot (option SupportDotNotation must be True)
+        Model.Value = _stringLocalizer["part_1.part_2"];
+        
         return View();
     }
 }

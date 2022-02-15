@@ -42,4 +42,9 @@ public class NuagesLocalizationOptions
     /// If not provided, FromBrowserCultureProvider will look for the Accept-Languages header.
     /// </summary>
     public string? LangCookie { get; set; } = ".nuageslang";
+
+    /// <summary>
+    /// When ture, you may used a dot notation to get value Ex. part_1.part_2 instead of part_1:part_2
+    /// </summary>
+    public bool SupportDotNotation { get; set; } = true;
 }
