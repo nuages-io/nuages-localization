@@ -49,7 +49,7 @@ internal class HttpConfigurationProvider : ConfigurationProvider, IDisposable
 
         var stream = client.GetStreamAsync(_apiConfigurationSource.Url).Result;
 
-        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_culture}");
+        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_culture}")!;
 
         stream.Close();
     }

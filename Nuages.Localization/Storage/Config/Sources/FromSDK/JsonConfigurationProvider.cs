@@ -24,6 +24,6 @@ public class JsonConfigurationProvider : FileConfigurationProvider
     /// <param name="stream">The stream to read.</param>
     public override void Load(Stream stream)
     {
-        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_culture}");
+        Data = JsonConfigurationFileParser.Parse(stream, $"{NuagesLocalizationOptions.NuagesLocalizationValues}:{_culture}")!;
     }
 }

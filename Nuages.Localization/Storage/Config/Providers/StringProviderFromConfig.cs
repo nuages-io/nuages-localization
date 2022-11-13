@@ -21,7 +21,7 @@ public class StringProviderFromConfig : IStringProvider
 
         //The AsEnumerable extension method can't be mock with Moq. Covered by the integration tests
         return lang.AsEnumerable().Where(s => !string.IsNullOrEmpty(s.Value))
-            .Select(s => new LocalizedString(s.Key, s.Value));
+            .Select(s => new LocalizedString(s.Key, s.Value!));
     }
 
     public string? GetString(string name, string culture)
