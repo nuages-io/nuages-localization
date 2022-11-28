@@ -32,7 +32,7 @@ builder.Services.AddRazorPages()
 builder.Services.AddControllersWithViews()
                 .AddNuagesLocalization();        
 ```
-By default, options are loaded from the appsettings.json. You can override the value when calling AssNuagesLocalization
+By default, options are loaded from the appsettings.json. You can override the value when calling AddNuagesLocalization
 
 ```csharp
 services.AddControllersWithViews()
