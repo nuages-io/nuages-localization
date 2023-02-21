@@ -117,6 +117,50 @@ public static class LocalizationConfigExtensions
         return builder;
     }
 
+    // ReSharper disable once UnusedMember.Local
+    private static ILocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
+        IConfiguration? configuration, Action<NuagesLocalizationOptions>? configure)
+    {
+       
+        if (configuration != null)
+        {
+            services.Configure<NuagesLocalizationOptions>(
+                configuration.GetSection(NuagesLocalizationOptions.NuagesLocalization));
+        }
+      
+        if (configure != null)
+            services.Configure(configure);
+        
+        services.AddSingleton<IConfigureOptions<NuagesLocalizationOptions>, ConfigureLocalizationOptions>();
+        
+        services.PostConfigure<NuagesLocalizationOptions>(localizationOptions =>
+        {
+            var configErrors = ValidationErrors(localizationOptions).ToArray();
+            // ReSharper disable once InvertIf
+            if (configErrors.Any())
+            {
+                var aggregateErrors = string.Join(",", configErrors);
+                var count = configErrors.Length;
+                var configType = localizationOptions.GetType().Name;
+                throw new ApplicationException(
+                    $"Found {count} configuration error(s) in {configType}: {aggregateErrors}");
+            }
+        });
+
+        services.AddScoped<IStringLocalizer, StringLocalizer>();
+        services.AddScoped(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+        services.AddSingleton<IMissingLocalizationHandler, MissingLocalizationConsoleHandler>();
+        
+        var builder = new LocalizationBuilder(services);
+        
+        AddCultureProvider<FromCulturesListCultureProvider>(builder);
+        AddCultureProvider<FromFallbackCultureProvider>(builder);
+      
+        builder.AddDefaultStringProvider();
+
+        return builder;
+    }
+       
     private static IEnumerable<string> ValidationErrors(object option)
     {
         var context = new ValidationContext(option, null);
