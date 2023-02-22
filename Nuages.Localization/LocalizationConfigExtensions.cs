@@ -118,7 +118,7 @@ public static class LocalizationConfigExtensions
     }
 
     // ReSharper disable once UnusedMember.Local
-    private static ILocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
+    public static ILocalizationBuilder AddNuagesLocalization(this IServiceCollection services,
         IConfiguration? configuration, Action<NuagesLocalizationOptions>? configure)
     {
        
